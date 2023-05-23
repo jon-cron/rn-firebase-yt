@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "739719929497",
+    "project_id": "rn-auth-practice-63bf3",
+    "storage_bucket": "rn-auth-practice-63bf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739719929497:android:9c1a96a4ce59bf03e92208",
+        "android_client_info": {
+          "package_name": "com.joncron30.rnfirebaseyt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739719929497-f1dvovgim7ahoe5d3ltbsi6jueo89999.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzgOrbvr-sXp1sqs--y4EvTmy8SATFbTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739719929497-f1dvovgim7ahoe5d3ltbsi6jueo89999.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "739719929497-807in5j21ea2b5i79i03uvfptdc9s066.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.joncron30.rnfirebaseyt"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
