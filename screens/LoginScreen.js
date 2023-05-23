@@ -27,7 +27,6 @@ const LoginScreen = ({ navigation }) => {
   const handleSignup = async () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(res._tokenResponse.idToken);
       setEmail("");
       setPassword("");
     } catch (error) {
@@ -37,7 +36,6 @@ const LoginScreen = ({ navigation }) => {
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      console.log(res._tokenResponse.idToken);
     } catch (error) {
       console.log(error.message);
     }
