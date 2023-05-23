@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,14 +9,19 @@ import {
 } from "react-native";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase_config";
+import { useDocument } from "../hooks/useDocument";
 const HomeScreen = ({ navigation }) => {
+  const [dbDocument, setDbDocument] = useState(null);
+  let testId = "34Z6PS9QTWK5rqmCpm5I";
   const handleLogout = async () => {
     await signOut(auth);
     navigation.replace("Login");
   };
+  const { document } = useDocument("test", testId);
+  console.log(document);
   return (
     <View style={styles.container}>
-      <Text>Email: {auth.currentUser?.email}</Text>
+      <Text>{document.text}</Text>
       <TouchableOpacity onPress={handleLogout}>
         <Text>Logout</Text>
       </TouchableOpacity>
