@@ -19,16 +19,14 @@ const HomeScreen = ({ navigation }) => {
   };
   console.log(documents);
   return (
-    <>
-      {document && (
-        <View style={styles.container}>
-          <Text>{document?.text}</Text>
-          <TouchableOpacity onPress={handleLogout}>
-            <Text>Logout</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    </>
+    <View style={styles.container}>
+      <Text>
+        {documents && documents[0]?.text}: {auth.currentUser.email}
+      </Text>
+      <TouchableOpacity onPress={handleLogout}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
