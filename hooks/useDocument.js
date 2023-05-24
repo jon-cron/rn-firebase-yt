@@ -4,16 +4,19 @@ import { db } from "../firebase/firebase_config";
 
 export const useDocument = (c, id) => {
   const [document, setDocument] = useState(null);
+  const [isPending, setIsPending] = useState(false);
 
   useEffect(() => {
+    setIsPending(true);
     // NOTE here is a good example of how to get a snapshot of a single doc using Firebase 9
     const unsub = async () => {
       const jobRef = doc(db, c, id);
       const unsub = onSnapshot(jobRef, (snapshot) => {
         setDocument(snapshot.data());
       });
+      setIsPending(false);
     };
     return () => unsub();
   }, [c, id]);
-  return { document };
+  return { document, isPending };
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
   View,
   Text,
@@ -11,22 +11,26 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase_config";
 import { useDocument } from "../hooks/useDocument";
 const HomeScreen = ({ navigation }) => {
-  const [dbDocument, setDbDocument] = useState(null);
   let testId = "34Z6PS9QTWK5rqmCpm5I";
+  const { document, isPending } = useDocument("test", testId);
+  const [dbDocument, setDbDocument] = useState(null);
   const handleLogout = async () => {
     await signOut(auth);
     navigation.replace("Login");
   };
-  const { document } = useDocument("test", testId);
-  console.log(document);
-  return (
-    <View style={styles.container}>
-      <Text>{document.text}</Text>
-      <TouchableOpacity onPress={handleLogout}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  useLayoutEffect(() => {
+    setDbDocument(document);
+  }, [document, isPending]);
+  if (document && isPending === false) {
+    return (
+      <View style={styles.container}>
+        <Text>{dbDocument?.text}</Text>
+        <TouchableOpacity onPress={handleLogout}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
