@@ -8,23 +8,27 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { signOut } from "firebase/auth";
-import { auth, db } from "../firebase/firebase_config";
-import { useDocument } from "../hooks/useDocument";
+import { auth } from "../firebase/firebase_config";
+import { useCollection } from "../hooks/useCollection";
+// import { useDocument } from "../hooks/useDocument";
 const HomeScreen = ({ navigation }) => {
-  let testId = "34Z6PS9QTWK5rqmCpm5I";
-  const { document } = useDocument("test", testId);
+  const { documents } = useCollection("test");
   const handleLogout = async () => {
     await signOut(auth);
     navigation.replace("Login");
   };
-
+  console.log(documents);
   return (
-    <View style={styles.container}>
-      <Text>{document?.text}</Text>
-      <TouchableOpacity onPress={handleLogout}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
-    </View>
+    <>
+      {document && (
+        <View style={styles.container}>
+          <Text>{document?.text}</Text>
+          <TouchableOpacity onPress={handleLogout}>
+            <Text>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </>
   );
 };
 
