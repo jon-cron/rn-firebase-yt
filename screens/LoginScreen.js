@@ -14,18 +14,10 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { AuthContext } from "../store/auth/auth-context";
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const authContext = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigation.navigate("Home");
-      }
-      return unsub;
-    });
-  }, []);
   const handleSignup = async () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -39,7 +31,6 @@ const LoginScreen = ({ navigation }) => {
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      // console.log(res._tokenResponse.idToken);
       authContext.authenticate(res._tokenResponse.idToken);
     } catch (error) {
       console.log(error.message);

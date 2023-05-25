@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,18 +10,19 @@ import {
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase_config";
 import { useCollection } from "../hooks/useCollection";
+import { AuthContext } from "../store/auth/auth-context";
 // import { useDocument } from "../hooks/useDocument";
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
+  const authCtx = useContext(AuthContext);
   const { documents } = useCollection("test");
   const handleLogout = async () => {
     await signOut(auth);
-    navigation.replace("Login");
+    authCtx.logout();
   };
-  console.log(documents);
   return (
     <View style={styles.container}>
       <Text>
-        {documents && documents[0]?.text}: {auth.currentUser.email}
+        {documents && documents[0]?.text}: {auth?.currentUser?.email}
       </Text>
       <TouchableOpacity onPress={handleLogout}>
         <Text>Logout</Text>
