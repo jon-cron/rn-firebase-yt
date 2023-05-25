@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,9 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+import { AuthContext } from "../store/auth/auth-context";
 const LoginScreen = ({ navigation }) => {
+  const authContext = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {
@@ -27,6 +29,7 @@ const LoginScreen = ({ navigation }) => {
   const handleSignup = async () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
+      authContext.authenticate(res._tokenResponse.idToken);
       setEmail("");
       setPassword("");
     } catch (error) {
@@ -36,6 +39,8 @@ const LoginScreen = ({ navigation }) => {
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
+      // console.log(res._tokenResponse.idToken);
+      authContext.authenticate(res._tokenResponse.idToken);
     } catch (error) {
       console.log(error.message);
     }
