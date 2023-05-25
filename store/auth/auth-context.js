@@ -1,5 +1,7 @@
 import React, { createContext, useState } from "react";
-
+// NOTE run npm install @react-native-async-storage/async-storage in the command prompt
+// NOTE this is the third party library that helps us save information onto the users phone
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AuthContext = createContext({
   token: "",
   isAuthenticated: false,
