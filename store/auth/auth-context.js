@@ -16,7 +16,7 @@ const AuthContextProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState();
   const [contextuUid, setContextUid] = useState();
   const authenticate = async (token, uid) => {
-    // NOTE for setItem(key, itemToStore) Item to store must be a string
+    // NOTE for setItem(key, itemToStore) Item to store must be a string.
     setAuthToken(token);
     setContextUid(auth.currentUser.uid);
     AsyncStorage.setItem("token", token);
