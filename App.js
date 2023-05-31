@@ -12,26 +12,12 @@ import { auth } from "./firebase/firebase_config";
 const Root = () => {
   const Stack = createNativeStackNavigator();
   const authCtx = useContext(AuthContext);
-  useEffect(() => {
-    const getVerified = async () => {
-      try {
-        const idToken = await AsyncStorage.getItem("token");
-        const res = await auth.verifyIdToken(idToken);
-        console.log(res);
-      } catch (err) {
-        console.log(err, err.message);
-      }
-    };
-    getVerified();
-  }, []);
   // useEffect(() => {
-  //   const getToken = async () => {
-  //     const storedToken = await AsyncStorage.getItem("token");
-  //     if (storedToken) {
-  //       authCtx.authenticate(storedToken);
+  //   auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       console.log("auth changed", user.stsTokenManager.accessToken);
   //     }
-  //   };
-  //   getToken();
+  //   });
   // }, []);
   return (
     <NavigationContainer>

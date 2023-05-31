@@ -14,15 +14,13 @@ export const AuthContext = createContext({
 
 const AuthContextProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState();
-  const [contextuUid, setContextUid] = useState();
-  const authenticate = async (token, uid) => {
+  const authenticate = async (user) => {
     // NOTE for setItem(key, itemToStore) Item to store must be a string.
-    setAuthToken(token);
-    setContextUid(auth.currentUser.uid);
-    AsyncStorage.setItem("token", token);
+    setAuthToken(user.refreshToken);
+    console.log("storing token", authToken);
+    await AsyncStorage.setItem("authToken", authToken);
     try {
-      const res = auth.createCustomToken(contextuUid);
-      console.log(res);
+      auth.createCustomToken(authToken);
     } catch (err) {
       console.log(err.message);
     }
@@ -31,9 +29,9 @@ const AuthContextProvider = ({ children }) => {
     setAuthToken(null);
     AsyncStorage.removeItem("token");
   };
+
   const value = {
     token: authToken,
-    uid: contextuUid,
     isAuthenticated: !!authToken,
     authenticate: authenticate,
     logout: logout,

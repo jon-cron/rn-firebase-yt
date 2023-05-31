@@ -30,8 +30,12 @@ const LoginScreen = () => {
   };
   const handleSignIn = async () => {
     try {
-      const res = await signInWithEmailAndPassword(auth, email, password);
-      authContext.authenticate(res._tokenResponse.idToken);
+      await signInWithEmailAndPassword(auth, email, password);
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          authContext.authenticate(user);
+        }
+      });
     } catch (error) {
       console.log(error.message);
     }
