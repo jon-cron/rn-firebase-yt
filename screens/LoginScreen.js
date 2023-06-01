@@ -20,8 +20,12 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const handleSignup = async () => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      authContext.authenticate(res._tokenResponse.idToken);
+      await createUserWithEmailAndPassword(auth, email, password);
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          authContext.authenticate(user);
+        }
+      });
       setEmail("");
       setPassword("");
     } catch (error) {
