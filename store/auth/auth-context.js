@@ -3,7 +3,6 @@ import React, { createContext, useEffect, useState } from "react";
 // NOTE this is the third party library that helps us save information onto the users phone
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth } from "../../firebase/firebase_config";
-import { auth as adminAuth } from "firebase-admin";
 export const AuthContext = createContext({
   token: "",
   uid: "",
