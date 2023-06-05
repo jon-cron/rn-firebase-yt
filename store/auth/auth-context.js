@@ -14,7 +14,7 @@ export const AuthContext = createContext({
 const AuthContextProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState();
   const authenticate = async (user) => {
-    // NOTE for setItem(key, itemToStore) Item to store must be a string.
+    // NOTE for setItem(key, itemToStore) Item to store must be a string
     setAuthToken(user.refreshToken);
     console.log("storing token", authToken);
     await AsyncStorage.setItem("authToken", authToken);
